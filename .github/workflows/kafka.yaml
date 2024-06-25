@@ -1,0 +1,14 @@
+name: Deploy Kafka
+on:
+  push:
+    paths:
+      - 'kafka/**'
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy Kafka
+        run: |
+          cd kafka
+          docker-compose up -d

@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mail-summarizer:
+    build: .
+    depends_on:
+      - kafka
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    external: true

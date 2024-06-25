@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mail-listener:
+    build: .
+    depends_on:
+      - kafka
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    external: true

@@ -1,0 +1,25 @@
+# Use Python base image
+FROM python:3.11-slim
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libxml2-dev \
+    libxslt-dev \
+    libffi-dev \
+    libssl-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy application files
+COPY . .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Environment variables
+ENV PATH_TO_MAILBOX /Users/danielwessendorf/Library/Mail/V10/AAFBC74F-473C-4C32-A82D-F772BB7CEC40
+
+# Run the application
+CMD ["python", "./listener.py", "/Users/danielwessendorf/Library/Mail/V10/AAFBC74F-473C-4C32-A82D-F772BB7CEC40"]
